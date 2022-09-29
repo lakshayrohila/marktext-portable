@@ -1,0 +1,29 @@
+#!/bin/sh
+
+HERE="$(dirname "$(readlink -f "$0")")"
+
+LAST_RELEASE=`wget -qO- `
+
+if [ ! -f "$HERE/DATA/INSTALLED_VERSION" ]; then
+    echo "none" > "$HERE/DATA/INSTALLED_VERSION"
+fi
+
+INSTALLED_VERSION=`cat "$HERE/DATA/INSTALLED_VERSION"`
+
+if [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
+    /usr/lib/gtkdialog/box_yesno --yes-first --info "Update Available!" "A new update of MarkText is found! Do you want to update?"
+    USER_ACCEPTED=$?
+
+    if [ $USER_ACCEPTED -eq 0 ]; then
+        rm "$HERE/app/marktext-x86_64.AppImage" >/dev/null 2>/dev/null
+        wget -P "$HERE/app/" "https://github.com/marktext/marktext/releases/download/$LAST_RELEASE/marktext-x86_64.AppImage"
+        echo $LAST_RELEASE > "$HERE/DATA/INSTALLED_VERSION"
+    fi
+
+    if [ ! -f "$HERE/app/marktext-x86_64.AppImage" ]; then
+        /usr/lib/gtkdialog/box_splash -bg red -fg white -timeout 10 -text "   DOWNLOAD FAILED!  Please try again later.....    "
+        exit 1
+    else
+        chmod 777 "$HERE/app/marktext-x86_64.AppImage"
+    fi
+fi

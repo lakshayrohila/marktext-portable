@@ -1,0 +1,12 @@
+#!/bin/sh
+
+HERE="$(dirname "$(readlink -f "$0")")"
+
+$HERE/UPDATER
+UPDATER_FAILED=$?
+
+if [ $UPDATER_FAILED -eq 1 ]; then
+    exit 1
+fi
+
+$HERE/app/marktext-x86_64.AppImage --no-sandbox $@
