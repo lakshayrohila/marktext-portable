@@ -2,7 +2,7 @@
 
 HERE="$(dirname "$(readlink -f "$0")")"
 
-LAST_RELEASE=`wget -qO- `
+LAST_RELEASE=`wget -qO- https://raw.githubusercontent.com/lakshayrohila/marktext-portable/master/DATA/.MARKTEXT_LAST_RELEASE`
 
 if [ ! -f "$HERE/DATA/INSTALLED_VERSION" ]; then
     echo "none" > "$HERE/DATA/INSTALLED_VERSION"

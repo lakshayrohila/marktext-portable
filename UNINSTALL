@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rm /usr/share/applications/marktext.desktop /usr/share/pixmaps/marktext.png /usr/bin/marktext
+rm /usr/share/applications/marktext.desktop /usr/share/pixmaps/marktext.png /usr/bin/marktext >/dev/null 2>/dev/null
