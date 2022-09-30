@@ -22,7 +22,7 @@ if [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
 
     if [ $USER_ACCEPTED -eq 0 ]; then
         rm "$HERE/app/marktext-x86_64.AppImage" >/dev/null 2>/dev/null
-        wget -P "$HERE/app/" "https://github.com/marktext/marktext/releases/download/$LAST_RELEASE/marktext-x86_64.AppImage"
+        rxvt -e wget -P "$HERE/app/" "https://github.com/marktext/marktext/releases/download/$LAST_RELEASE/marktext-x86_64.AppImage"
         echo $LAST_RELEASE > "$HERE/DATA/INSTALLED_VERSION"
 
         if [ ! -f "$HERE/app/marktext-x86_64.AppImage" ]; then
