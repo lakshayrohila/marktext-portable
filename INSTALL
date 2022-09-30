@@ -4,6 +4,6 @@ HERE="$(dirname "$(readlink -f "$0")")"
 
 rm /usr/share/applications/marktext.desktop /usr/share/pixmaps/marktext.png /usr/bin/marktext >/dev/null 2>/dev/null
 
-ln -s  $HERE/LAUNCH /usr/bin/marktext
+ln -s $HERE/LAUNCH /usr/bin/marktext
 ln -s $HERE/DATA/resources/marktext.desktop /usr/share/applications/
 ln -s $HERE/DATA/resources/marktext.png /usr/share/pixmaps/
