@@ -14,17 +14,17 @@ You may get the **MarkText-portable** as a **.zip** file from its [Github Reposi
 
 2. Click on **Code** button that is visible there.
    
-   ![Step 2](/root/spot/images/1.png "Step 2")
+   ![Code button](https://drive.google.com/uc?export=view&id=13f7drakepOaT9SQo3MuSY8unNldm9D0I)
 
 3. Clicking the **Code** button will open up a drop-down menu (refer to the below image). In the drop-down menu, click **Download ZIP**.
    
-   ![Step 3](/home/spot/images/2.png "Step 3")
+   ![Download ZIP](https://drive.google.com/uc?export=view&id=176YmaZwHd4zNxNEXvHweqJ4aOLvvyH1-)
 
 4. This will download a file named **marktext-portable-master.zip**. Use your favourite utility to extract the **zip** file downloaded.
 
 5. **Step 4** will extract the **zip** file to a folder named **marktext-portable-master** (In case you don't like the name, rename the directory as you would rename any other directory). Open up the directory. It will look something like this-
    
-   ![Step 5](/root/spot/images/5.png "Step 5")
+   ![MarkText-portable Directory Structure](https://drive.google.com/uc?export=view&id=1DuwwrNQPIYukSoVu3s64qIADjZNBXu9_)
    
    Here, there will be 4 executable files. These are-
    
