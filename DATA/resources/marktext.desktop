@@ -4,7 +4,7 @@ Comment=Next generation markdown editor
 Exec=marktext %F
 Terminal=false
 Type=Application
-Icon=marktext.png
+Icon=/usr/share/pixmaps/marktext.png
 Categories=Office;TextEditor;Utility;
 MimeType=text/markdown;
 Keywords=marktext;
@@ -14,4 +14,4 @@ Actions=NewWindow;
 [Desktop Action NewWindow]
 Name=New Window
 Exec=marktext --new-window %F
-Icon=marktext.png
+Icon=/usr/share/pixmaps/marktext.png
