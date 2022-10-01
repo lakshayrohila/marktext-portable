@@ -2,6 +2,9 @@
 
 HERE="$(dirname "$(readlink -f "$0")")"
 
+# TODO: use a single command that runs default terminal instead of rxvt
+TERMINAL=rxvt
+
 LAST_RELEASE=`wget -qO- https://raw.githubusercontent.com/lakshayrohila/marktext-portable/master/DATA/.MARKTEXT_LAST_RELEASE`
 
 if [ ! -f "$HERE/DATA/INSTALLED_VERSION" ]; then
@@ -18,11 +21,16 @@ if [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
     if [ $USER_ACCEPTED -eq 127 ]; then
         gxmessage -center -bg orange -buttons "Yes:0,No:1" "A new update of MarkText is found! Do you want to update?" -title "Update Available!"
         USER_ACCEPTED=$?
+
+        if [ $USER_ACCEPTED -eq 127 ];then
+            $TERMINAL -e sh -c "echo \"Note that gxmessage is not found. Please install gxmessage.\" && sleep 10"
+            exit 1
+        fi
     fi
 
     if [ $USER_ACCEPTED -eq 0 ]; then
         rm "$HERE/app/marktext-x86_64.AppImage" >/dev/null 2>/dev/null
-        rxvt -e wget -P "$HERE/app/" "https://github.com/marktext/marktext/releases/download/$LAST_RELEASE/marktext-x86_64.AppImage"
+        $TERMINAL -e wget -P "$HERE/app/" "https://github.com/marktext/marktext/releases/download/$LAST_RELEASE/marktext-x86_64.AppImage"
         echo $LAST_RELEASE > "$HERE/DATA/INSTALLED_VERSION"
 
         if [ ! -f "$HERE/app/marktext-x86_64.AppImage" ]; then
