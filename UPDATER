@@ -6,6 +6,23 @@ TERMINAL=rxvt
 
 LAST_RELEASE=`wget -qO- https://raw.githubusercontent.com/lakshayrohila/marktext-portable/master/DATA/.MARKTEXT_LAST_RELEASE`
 
+if [ -z "$LAST_RELEASE" ]; then
+    /usr/lib/gtkdialog/box_splash -bg red -fg white -timeout 5 -text "I am having problems checking for latest release."
+    if [ $? -eq 127 ]; then
+        gxmessage -borderless -center -bg orange -timeout 5 "I am having problems checking for latest release."
+        if [ $? -eq 127 ];then
+            $TERMINAL -e sh -c "echo \"I am having problems checking for latest release.\" && sleep 5"
+            echo "I am having problems checking for latest release."
+        fi
+    fi
+
+    if [ ! -f "$HERE/app/marktext-x86_64.AppImage" ]; then
+        exit 1
+    fi
+
+    exit 0
+fi
+
 if [ ! -f "$HERE/DATA/INSTALLED_VERSION" ]; then
     echo "none" > "$HERE/DATA/INSTALLED_VERSION"
 fi
