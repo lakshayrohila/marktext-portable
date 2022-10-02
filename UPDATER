@@ -50,6 +50,8 @@ if [ ! -f "$HERE/app/marktext-x86_64.AppImage" ]; then
         fi
 
         echo $LAST_RELEASE > "$HERE/DATA/INSTALLED_VERSION"
+    elif [ $USER_ACCEPTED -eq 1 ]; then
+        exit 1
     fi
 elif [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
     /usr/lib/gtkdialog/box_yesno --yes-first --info "Update Available!" "A new update of MarkText is found! Do you want to update?"
