@@ -2,7 +2,6 @@
 
 HERE="$(dirname "$(readlink -f "$0")")"
 
-# TODO: use a single command that runs default terminal instead of rxvt
 TERMINAL=rxvt
 
 LAST_RELEASE=`wget -qO- https://raw.githubusercontent.com/lakshayrohila/marktext-portable/master/DATA/.MARKTEXT_LAST_RELEASE`
@@ -13,7 +12,46 @@ fi
 
 INSTALLED_VERSION=`cat "$HERE/DATA/INSTALLED_VERSION"`
 
-if [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
+if [ ! -f "$HERE/app/marktext-x86_64.AppImage" ]; then
+    /usr/lib/gtkdialog/box_yesno --yes-first --no-label "Later" --info "Install MarkText!" "MarkText binary is not found! Do you want to download MarkText binary?"
+
+    USER_ACCEPTED=$?
+
+    if [ $USER_ACCEPTED -eq 127 ]; then
+        gxmessage -center -bg orange -buttons "Yes:0,Later:1" "MarkText binary is not found! Do you want to download MarkText binary?" -title "Install MarkText!"
+        USER_ACCEPTED=$?
+
+        if [ $USER_ACCEPTED -eq 127 ];then
+            $TERMINAL -e sh -c "echo \"Note that gxmessage is not found. Please install gxmessage.\" && sleep 10"
+            echo "Note that gxmessage is not found. Please install gxmessage."
+            exit 1
+        fi
+    fi
+
+    if [ $USER_ACCEPTED -eq 0 ]; then
+        $TERMINAL -e wget -P "$HERE/app/" "https://github.com/marktext/marktext/releases/download/$LAST_RELEASE/marktext-x86_64.AppImage"
+
+        if [ $? -eq 127 ]; then
+            /usr/lib/gtkdialog/box_splash -bg red -fg white -timeout 10 -text "Note that rxvt is not found. Please install rxvt."
+            if [ $? -eq 127 ]; then
+                gxmessage -borderless -center -bg orange -timeout 10 "Note that rxvt is not found. Please install rxvt."
+            fi
+
+            exit 1
+        fi
+
+        if [ ! -f "$HERE/app/marktext-x86_64.AppImage" ]; then
+            /usr/lib/gtkdialog/box_splash -bg red -fg white -timeout 10 -text "   DOWNLOAD FAILED!  Please try again later.....    "
+            if [ $? -eq 127 ]; then
+                gxmessage -borderless -center -bg orange -timeout 10 "   DOWNLOAD FAILED!  Please try again later.....    "
+            fi
+        else
+            chmod 777 "$HERE/app/marktext-x86_64.AppImage"
+        fi
+
+        echo $LAST_RELEASE > "$HERE/DATA/INSTALLED_VERSION"
+    fi
+elif [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
     /usr/lib/gtkdialog/box_yesno --yes-first --info "Update Available!" "A new update of MarkText is found! Do you want to update?"
 
     USER_ACCEPTED=$?
@@ -24,6 +62,7 @@ if [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
 
         if [ $USER_ACCEPTED -eq 127 ];then
             $TERMINAL -e sh -c "echo \"Note that gxmessage is not found. Please install gxmessage.\" && sleep 10"
+            echo "Note that gxmessage is not found. Please install gxmessage."
             exit 1
         fi
     fi
@@ -31,7 +70,15 @@ if [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
     if [ $USER_ACCEPTED -eq 0 ]; then
         rm "$HERE/app/marktext-x86_64.AppImage" >/dev/null 2>/dev/null
         $TERMINAL -e wget -P "$HERE/app/" "https://github.com/marktext/marktext/releases/download/$LAST_RELEASE/marktext-x86_64.AppImage"
-        echo $LAST_RELEASE > "$HERE/DATA/INSTALLED_VERSION"
+
+        if [ $? -eq 127 ]; then
+            /usr/lib/gtkdialog/box_splash -bg red -fg white -timeout 10 -text "Note that rxvt is not found. Please install rxvt."
+            if [ $? -eq 127 ]; then
+                gxmessage -borderless -center -bg orange -timeout 10 "Note that rxvt is not found. Please install rxvt."
+            fi
+
+            exit 1
+        fi
 
         if [ ! -f "$HERE/app/marktext-x86_64.AppImage" ]; then
             /usr/lib/gtkdialog/box_splash -bg red -fg white -timeout 10 -text "   DOWNLOAD FAILED!  Please try again later.....    "
@@ -43,5 +90,7 @@ if [ $LAST_RELEASE != $INSTALLED_VERSION ]; then
         else
             chmod 777 "$HERE/app/marktext-x86_64.AppImage"
         fi
+
+        echo $LAST_RELEASE > "$HERE/DATA/INSTALLED_VERSION"
     fi
 fi
