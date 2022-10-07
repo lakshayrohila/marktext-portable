@@ -4,7 +4,7 @@ This is a portable of **MarkText** application, which manages **installation**, 
 
 ### Installation
 
-No installation needed! **MarkText-portable** is what its name suggests- a **Portable**. Though setup is needed, and a knowledge of what to run when. All of the upcoming portion of this **README** focuses on providing the knwledge for the same.
+No installation needed! **MarkText-portable** is what its name suggests- a **Portable**. Though setup is needed, and a knowledge of what to run when. All of the upcoming portion of this **README** focuses on providing the knowledge for the same.
 
 ### Requirements
 
@@ -30,7 +30,7 @@ You may get the **MarkText-portable** as a **.zip** file from its [Github Reposi
    
    ![Download ZIP](https://drive.google.com/uc?export=view&id=176YmaZwHd4zNxNEXvHweqJ4aOLvvyH1-)
 
-5. This will download a file named **marktext-portable-master.zip**. Use your favourite utility to extract the **zip** file downloaded.
+5. This will download a file named **marktext-portable-master.zip**. Use your favorite utility to extract the **zip** file downloaded.
 
 6. **Step 4** will extract the **zip** file to a folder named **marktext-portable-master** (In case you don't like the name, rename the directory as you would rename any other directory). Open up the directory. It will look something like this-
    
