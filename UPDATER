@@ -2,7 +2,7 @@
 
 HERE="$(dirname "$(readlink -f "$0")")"
 
-TERMINAL=rxvt
+TERMINAL=urxvt
 
 LAST_RELEASE=`wget -qO- https://raw.githubusercontent.com/lakshayrohila/marktext-portable/master/DATA/.MARKTEXT_LAST_RELEASE`
 
