@@ -10,7 +10,7 @@ No installation needed! **MarkText-portable** is what its name suggests- a **Por
 
 You'll need the following programs for running **MarkText-portable**. Install them if you do not have them-
 
-1. **rxvt** terminal
+1. **urxvt** terminal
 
 2. **gxmessage** (Ignore if **/usr/lib/gtkdialog/box_yesno** and **/usr/lib/gtkdialog/box_splash** are present)
 
